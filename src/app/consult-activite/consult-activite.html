@@ -1,2 +1,24 @@
-<p>consult-activite works!</p>
-<p>Paramètre reçu : {{ param1 }}</p>
+<h3>Detail de l'activité:</h3>
+@if (activite !== undefined) {
+  <ol>
+    <li>
+      Nom de l'activité :
+      @if (enEdition) {
+        <input type="text" [(ngModel)]="nouveauTitre" />
+      } @else {
+        <b>{{ activite }}</b>
+      }
+    </li>
+  </ol>
+
+  <button class="btn rouge" (click)="supprimeElem(index)">Supprimer</button>
+  @if (enEdition) {
+    <button class="btn bleu" (click)="sauvegarder()">Sauvegarder</button>
+  } @else {
+    <button class="btn bleu" (click)="modifier()">Modifier</button>
+    <button class="btn vert" (click)="retour()">Retour</button>
+  }
+} @else {
+  <p>Aucune activité trouvée.</p>
+  <button class="btn vert" (click)="retour()">Retour</button>
+}
