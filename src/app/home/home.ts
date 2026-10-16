@@ -30,14 +30,6 @@ export class Home {
     }, 1000);
   }
 
-  supprimerItem(index: number) {
-    this.activiteService.removeItem(index);
-  }
-
-  supprimerTout() {
-    this.activiteService.objectifs.splice(0);
-  }
-
   consulter(index: number) {
     this.monRouteur.navigate(['/consultAct', index]);
   }

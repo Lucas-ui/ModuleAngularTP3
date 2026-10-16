@@ -4,7 +4,6 @@
   </div>
   <div class="col right-col">
     <p>Ma liste d'éléments ({{ activiteService.objectifs.length }})</p>
-    <input type="button" class="btn" (click)="supprimerTout()" value="Tout supprimer" />
   </div>
 </div>
 <div class="container color-light transition2" animate.enter="animation-ajout">
@@ -19,7 +18,6 @@
     <div class="list">
       @for (objectif of activiteService.objectifs; track $index) {
         <p class="life-container" (click)="consulter($index)">{{ $index + 1 }} {{ objectif }}</p>
-        <p class="btn" (click)="supprimerItem($index)">Supprimer</p>
       }
     </div>
   </div>
