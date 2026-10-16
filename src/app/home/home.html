@@ -1,0 +1,26 @@
+<div class="container color-dark transition1" animate.enter="animation-ajout">
+  <div class="col">
+    <p>Un élément de liste</p>
+  </div>
+  <div class="col right-col">
+    <p>Ma liste d'éléments ({{ nbItems }})</p>
+    <input type="button" class="btn" (click)="supprimerTout()" value="Tout supprimer" />
+  </div>
+</div>
+<div class="container color-light transition2" animate.enter="animation-ajout">
+  <div class="col">
+    <p class="sm">Un nouvel élément de liste</p>
+    <input type="text" name="texte" class="txt" placeholder="..." [(ngModel)]="objectifText" />
+    <p>{{ objectifText }}</p>
+    <!-- Lucas ROLLAND -->
+    <input type="submit" [value]="btnText" class="btn" (click)="ajoutItem()" />
+  </div>
+  <div class="col">
+    <div class="list">
+      @for (objectif of objectifs; track $index) {
+        <p class="life-container">{{ $index + 1 }} {{ objectif }}</p>
+        <p class="btn" (click)="supprimerItem(objectif)">Supprimer</p>
+      }
+    </div>
+  </div>
+</div>
