@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ActiviteService } from '../services/activite.service';
 
 @Component({
   imports: [FormsModule],
@@ -9,40 +10,35 @@ import { Router } from '@angular/router';
   templateUrl: './home.html',
 })
 export class Home {
-  nbItems: number = 4;
   btnText: string = 'Ajouter un item';
   objectifText: string = '';
-  objectifs: string[] = [];
-  private monRouteur: Router = new Router();
 
-  // Lucas ROLLAND
-  ngOnInit() {
-    this.nbItems = this.objectifs.length;
-  }
+  constructor(
+    public activiteService: ActiviteService,
+    private monRouteur: Router,
+  ) {}
 
   // Lucas ROLLAND
   ajoutItem() {
     this.objectifText = this.objectifText.trim();
     if (this.objectifText) {
-      this.objectifs.push(this.objectifText);
+      this.activiteService.objectifs.push(this.objectifText);
       this.objectifText = '';
-      this.nbItems = this.objectifs.length;
     }
     setTimeout(() => {
       this.monRouteur.navigate(['/about']);
     }, 1000);
   }
 
-  supprimerItem(objectif: string) {
-    const index = this.objectifs.indexOf(objectif);
-    if (index > -1) {
-      this.objectifs.splice(index, 1);
-      this.nbItems = this.objectifs.length;
-    }
+  supprimerItem(index: number) {
+    this.activiteService.removeItem(index);
   }
 
   supprimerTout() {
-    this.objectifs = [];
-    this.nbItems = 0;
+    this.activiteService.objectifs.splice(0);
+  }
+
+  consulter(index: number) {
+    this.monRouteur.navigate(['/consultAct', index]);
   }
 }
